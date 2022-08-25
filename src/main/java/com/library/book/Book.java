@@ -16,33 +16,28 @@ public class Book {
             strategy = GenerationType.SEQUENCE,
             generator = "book_sequence"
     )
+    @Column(name = "book_id")
     private Long bookId;
 
     private String title;
     private String author;
-    private Boolean available;
 
     public Book() {
     }
 
+    public Book(Long bookId) {
+        this.bookId = bookId;
+    }
 
     public Book(String title, String author) {
         this.title = title;
         this.author = author;
-        this.available = true;
     }
 
-    public Book(String title, String author, Boolean available) {
-        this.title = title;
-        this.author = author;
-        this.available = available;
-    }
-
-    public Book(Long bookId, String title, String author, Boolean available) {
+    public Book(Long bookId, String title, String author) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
-        this.available = available;
     }
 
     public Long getBookId() {
@@ -63,14 +58,6 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public Boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
     }
 
     @Override
