@@ -12,7 +12,7 @@ public class BookConfig {
     @Bean
     CommandLineRunner booCommandLineRunner(BookRepository repository) {
         return args -> {
-            Book lotr = new Book(1L,"Lord of the Rings", "JRR Tolkien");
+            Book lotr = new Book("Lord of the Rings", "JRR Tolkien");
             Book catch22 = new Book("Catch 22", "Joseph Heller");
             Book gatsby = new Book("The Great Gatsby", "F. Scott Fitzgerald");
 
