@@ -1,10 +1,7 @@
 package com.library.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,8 +22,19 @@ public class BookController {
     }
 
     @PostMapping
-    public Book addNewBook(Book book) {
-        return bookService.addNewBook(book);
+    public void addNewBook(@RequestBody Book book) {
+        bookService.addNewBook(book);
+    }
+
+    @PutMapping("{bookId}")
+    public void updateBook(@PathVariable Long bookId,
+                           @RequestBody Book book){
+        bookService.updateBook(bookId, book);
+    }
+
+    @DeleteMapping("{bookId}")
+    public void deleteById(@PathVariable Long bookId) {
+        bookService.deleteById(bookId);
     }
 
 }
