@@ -46,9 +46,10 @@ public class User {
     /**
      * This constructor is used for creating a new user without a book list.
      * In this case, for example, get request would result with an empty list: "bookList": [].
-     * @param name username.
+     *
+     * @param name  username.
      * @param email user's email.
-     * @param dob user's date of birth.
+     * @param dob   user's date of birth.
      */
     public User(String name, String email, LocalDate dob) {
         this.name = name;
@@ -58,9 +59,10 @@ public class User {
 
     /**
      * This constructor is used for creating a new user with a list of books.
-     * @param name username.
-     * @param email user's email.
-     * @param dob user's date of birth.
+     *
+     * @param name     username.
+     * @param email    user's email.
+     * @param dob      user's date of birth.
      * @param bookList books list.
      */
     public User(String name, String email, LocalDate dob, List<Book> bookList) {
@@ -72,6 +74,7 @@ public class User {
 
     /**
      * Returns user ID.
+     *
      * @return user ID.
      */
     public Long getUserId() {
@@ -80,6 +83,7 @@ public class User {
 
     /**
      * Returns username.
+     *
      * @return username.
      */
     public String getName() {
@@ -88,6 +92,7 @@ public class User {
 
     /**
      * Sets username.
+     *
      * @param name username.
      */
     public void setName(String name) {
@@ -96,6 +101,7 @@ public class User {
 
     /**
      * Returns user's email.
+     *
      * @return user's email.
      */
     public String getEmail() {
@@ -104,6 +110,7 @@ public class User {
 
     /**
      * Sets user's email.
+     *
      * @param email user's email.
      */
     public void setEmail(String email) {
@@ -112,6 +119,7 @@ public class User {
 
     /**
      * Returns user's date of birth.
+     *
      * @return user's date of birth.
      */
     public LocalDate getDob() {
@@ -120,6 +128,7 @@ public class User {
 
     /**
      * Sets user's date of birth.
+     *
      * @param dob user's date of birth.
      */
     public void setDob(LocalDate dob) {
@@ -128,6 +137,7 @@ public class User {
 
     /**
      * Returns a list of books possessed by the user.
+     *
      * @return a list of books.
      */
     public List<Book> getBookList() {
@@ -136,6 +146,7 @@ public class User {
 
     /**
      * Sets a list of books possessed by the user.
+     *
      * @param bookList a list of books.
      */
     public void setBookList(List<Book> bookList) {
