@@ -1,9 +1,10 @@
 package com.library.user;
 
 import com.library.book.Book;
+import com.library.book.BookRepository;
+import com.library.book.exception.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpServerErrorException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -12,10 +13,12 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final BookRepository bookRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BookRepository bookRepository) {
         this.userRepository = userRepository;
+        this.bookRepository = bookRepository;
     }
 
     /**
@@ -50,16 +53,14 @@ public class UserService {
      */
     @Transactional
     public void borrowBooks(Long userId, List<Book> books) {
-        User user = userRepository.getReferenceById(userId);
-        List<Book> usersBooks = user.getBookList();
+        List<Book> usersBooks = userRepository.getReferenceById(userId).getBookList();
         for (Book book : books) {
-            try {
-                usersBooks.add(book);
-                if (usersBooks.size() > 10) {
-                    throw new IllegalStateException("Limit of books to borrow has been reached!");
-                }
-            } catch (HttpServerErrorException.InternalServerError e) {
-                throw new IllegalStateException("Book: " + book.getBookId() + " does not exist in the database!");
+            if (!bookRepository.existsById(book.getBookId())) {
+                throw new BookNotFoundException(book.getBookId());
+            }
+            usersBooks.add(book);
+            if (usersBooks.size() > 10) {
+                throw new IllegalStateException("Limit of books to borrow has been reached!");
             }
         }
     }
@@ -74,11 +75,14 @@ public class UserService {
      */
     @Transactional
     public void returnBooks(Long userId, List<Book> books) {
-        User user = userRepository.getReferenceById(userId);
-        List<Book> usersBooks = user.getBookList();
+        List<Book> usersBooks = userRepository.getReferenceById(userId).getBookList();
+        List<Long> userBookListIds = usersBooks.stream()
+                .map(Book::getBookId)
+                .toList();
+
         for (Book book : books) {
-            if (!usersBooks.contains(book)) {
-                throw new IllegalStateException("User: " + userId + " does not have book: " + book.getBookId());
+            if (!userBookListIds.contains(book.getBookId())) {
+                throw new BookNotFoundException(book.getBookId());
             }
             usersBooks.remove(books.indexOf(book));
         }
