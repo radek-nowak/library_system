@@ -31,6 +31,7 @@ public class Book {
     /**
      * This constructor is used for instantiating a Book object
      * which is already registered in a database.
+     *
      * @param bookId book ID.
      */
     public Book(Long bookId) {
@@ -41,7 +42,8 @@ public class Book {
      * This is a main constructor of this class. It is used when
      * creating new books. There is no need to pass book ID, since
      * it is generated automatically.
-     * @param title book title.
+     *
+     * @param title  book title.
      * @param author book author.
      */
     public Book(String title, String author) {
@@ -51,6 +53,7 @@ public class Book {
 
     /**
      * Returns a book's ID.
+     *
      * @return book ID.
      */
     public Long getBookId() {
@@ -59,6 +62,7 @@ public class Book {
 
     /**
      * Returns a book's title.
+     *
      * @return book title.
      */
     public String getTitle() {
@@ -67,6 +71,7 @@ public class Book {
 
     /**
      * Sets a book title.
+     *
      * @param title book title.
      */
     public void setTitle(String title) {
@@ -75,6 +80,7 @@ public class Book {
 
     /**
      * Returns a book's author.
+     *
      * @return book author.
      */
     public String getAuthor() {
@@ -83,6 +89,7 @@ public class Book {
 
     /**
      * Sets a book author.
+     *
      * @param author an author of the book.
      */
     public void setAuthor(String author) {
