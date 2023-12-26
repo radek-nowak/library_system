@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  title: Library
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+
+tags:
+  - name: Library
+
+paths:
+  /api/books:
+    get:
+      tags:
+        - Ui
+      operationId: findBooks
+      summary: Search for Books
+      responses:
+        '200':
+          $ref: '#/components/responses/BookListResponse'
+
+
+components:
+
+  schemas:
+    BookObject:
+      description: Book object
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          description: Book identifier
+          type: integer
+          minimum: 0
+          format: int64
+          example: 1
+        title:
+          description: Book's title
+          type: string
+          example: Catch 22
+        author:
+          description: Book's author
+          type: string
+          example: Joseph Heller
+
+
+  responses:
+    BookListResponse:
+      description: List of Books
+      content:
+        'application/json':
+          schema:
+#            $ref: '#/components/schemas/Books'
+            allOf:
+              - type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BookObject'

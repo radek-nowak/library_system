@@ -29,6 +29,6 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @Column(name = "book_list")
-    private List<Book> books;
+    private List<BookEntity> books;
 }
 

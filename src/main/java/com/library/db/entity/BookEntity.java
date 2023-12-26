@@ -6,17 +6,17 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "books")
-@Data
+@Table(name = "BOOKS")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Book {
+@Getter
+@NoArgsConstructor
+public class BookEntity {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column
     String title;
 
-    @Column
     String author;
 }
