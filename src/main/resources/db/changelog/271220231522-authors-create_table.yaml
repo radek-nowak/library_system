@@ -4,7 +4,7 @@ databaseChangeLog:
       id: 1
       changes:
         - createTable:
-            tableName: books
+            tableName: authors
             columns:
               - column:
                   name: id
@@ -13,7 +13,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
               - column:
-                  name: title
+                  name: name
                   type: varchar(255)
                   constraints:
                     nullable: false

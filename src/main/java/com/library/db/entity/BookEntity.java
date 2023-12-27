@@ -1,6 +1,7 @@
 package com.library.db.entity;
 
 import jakarta.persistence.*;
+import java.util.Set;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,5 +19,6 @@ public class BookEntity {
 
   String title;
 
-  String author;
+  @ManyToMany(mappedBy = "books")
+  Set<AuthorEntity> authors;
 }

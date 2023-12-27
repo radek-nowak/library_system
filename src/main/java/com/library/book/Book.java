@@ -1,3 +1,6 @@
 package com.library.book;
 
-public record Book(String title, String author) {}
+import com.library.author.Author;
+import java.util.Set;
+
+public record Book(String title, Set<Author> author) {}

@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      author: Radosław Nowak
+      id: 1
+      comment: Join table between authors and books
+      changes:
+        - createTable:
+            tableName: authors-books
+            columns:
+              - column:
+                  name: author_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_author_id
+                    references: authors(id)
+              - column:
+                  name: book_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_book_id
+                    references: books(id)
+
+        - addPrimaryKey:
+            tableName: authors-books
+            constraintName: pk-authors-books
+            columnNames: author_id, book_id
