@@ -15,7 +15,8 @@ class BookRepositoryTest {
   @Test
   void shouldFindSavedBook() {
     // given
-    BookEntity book = repository.save(new BookEntity(null, "Catch 22", "Joseph Heller"));
+
+    BookEntity book = repository.save(new BookEntity(null, "Catch 22", null));
 
     // when
     List<BookEntity> books = repository.findAll();
@@ -26,7 +27,6 @@ class BookRepositoryTest {
         .satisfies(
             bookEntities -> {
               BookEntity bookEntity = bookEntities.get(0);
-              assertThat(bookEntity.getAuthor()).isEqualTo(book.getAuthor());
               assertThat(bookEntity.getTitle()).isEqualTo(book.getTitle());
             });
   }

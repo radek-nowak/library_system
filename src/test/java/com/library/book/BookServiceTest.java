@@ -3,9 +3,12 @@ package com.library.book;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.library.db.JpaBookStorage;
+import com.library.db.entity.AuthorEntity;
 import com.library.db.entity.BookEntity;
 import com.library.db.entity.BookRepository;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -29,8 +32,9 @@ class BookServiceTest {
   void shouldFindBooks() {
     // given
     String title = "Catch 22";
-    String author = "Joseph Heller";
-    Mockito.when(repository.findAll()).thenReturn(List.of(new BookEntity(null, title, author)));
+    AuthorEntity author = new AuthorEntity(null, "Joseph Heller", Collections.emptySet());
+    Mockito.when(repository.findAll())
+        .thenReturn(List.of(new BookEntity(null, title, Set.of(author))));
 
     // when
     List<Book> foundBooks = bookService.findAll();
