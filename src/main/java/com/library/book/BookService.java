@@ -13,6 +13,8 @@ public class BookService {
     private final BookMapper mapper;
 
     public List<Book> findAll() {
-        return bookStorage.findAll().stream().map(mapper::toDomain).toList();
+        return bookStorage.findAll().stream()
+                .map(mapper::toDomain)
+                .toList();
     }
 }

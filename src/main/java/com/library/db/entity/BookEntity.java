@@ -1,9 +1,10 @@
 package com.library.db.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
+
 
 @Entity
 @Table(name = "BOOKS")
