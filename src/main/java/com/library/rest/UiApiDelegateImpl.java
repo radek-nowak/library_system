@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UiApiDelegateImpl implements UiApiDelegate {
 
-    private final BookService bookService;
-    private final RequestMapper requestMapper;
+  private final BookService bookService;
+  private final RequestMapper requestMapper;
 
-    @Override
-    public ResponseEntity<FindBooks200Response> findBooks() {
-        return ResponseEntity.ok(requestMapper.toDto(bookService.findAll()));
-    }
+  @Override
+  public ResponseEntity<FindBooks200Response> findBooks() {
+    return ResponseEntity.ok(requestMapper.toDto(bookService.findAll()));
+  }
 }

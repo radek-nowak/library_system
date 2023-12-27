@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-
-
 @Entity
 @Table(name = "BOOKS")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -14,11 +12,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 public class BookEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Long id;
 
-    String title;
+  String title;
 
-    String author;
+  String author;
 }

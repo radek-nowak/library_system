@@ -1,6 +1,3 @@
 package com.library.book;
 
-public record Book(
-        String title,
-        String author
-) {}
+public record Book(String title, String author) {}

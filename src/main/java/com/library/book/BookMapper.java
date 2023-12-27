@@ -5,5 +5,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface BookMapper {
-    Book toDomain(BookEntity entities);
+
+  Book toDomain(BookEntity entity);
 }

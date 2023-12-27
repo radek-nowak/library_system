@@ -2,10 +2,8 @@ openapi: 3.0.3
 info:
   title: Library
   version: 1.0.0
-
 servers:
   - url: http://localhost:8080
-
 tags:
   - name: Library
 
