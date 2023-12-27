@@ -10,6 +10,7 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class BookEntity {
 
     @Id
