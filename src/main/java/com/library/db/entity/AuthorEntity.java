@@ -4,14 +4,14 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "AUTHORS")
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class AuthorEntity {
 
