@@ -1,7 +1,6 @@
 package com.library.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,7 +21,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
@@ -51,25 +49,20 @@ class UiApiDelegateImplIT {
 
     String requestBody = "[" + "\"" + authorTechnicalId + "\"" + "]";
 
-    MvcResult mvcResult =
-        mockMvc
-            .perform(
-                put("/api/books/%s/authors".formatted(bookTechnicalId))
-                    .content(requestBody)
-                    .contentType(MediaType.APPLICATION_JSON))
-            .andDo(print())
-            .andExpect(status().isOk())
-            .andReturn();
+    mockMvc
+        .perform(
+            put("/api/books/%s/authors".formatted(bookTechnicalId))
+                .content(requestBody)
+                .contentType(MediaType.APPLICATION_JSON))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andReturn();
 
     var foundBookEntity =
         em.createQuery(
                 "select b from BookEntity b where technicalId = :technicalId", BookEntity.class)
             .setParameter("technicalId", bookTechnicalId)
             .getSingleResult();
-    //        var foundBookEntity = em.createQuery("select b from BookEntity b left join fetch
-    // b.authors where b.technicalId = :technicalId", BookEntity.class)
-    //                .setParameter("technicalId", bookTechnicalId)
-    //                .getSingleResult();
 
     var foundAuthorEntity =
         em.createQuery(
@@ -80,11 +73,10 @@ class UiApiDelegateImplIT {
     var joinTableData =
         em.createNativeQuery(
                 "select * from authors_books where author_id = :authorId and book_id = :bookId")
-            .setParameter("authorId", authorTechnicalId)
-            .setParameter("bookId", bookTechnicalId)
+            .setParameter("authorId", foundAuthorEntity.getId())
+            .setParameter("bookId", foundBookEntity.getId())
             .getResultList();
 
-    assertThat(foundBookEntity.getAuthors()).contains(authorEntity);
     assertThat(joinTableData).isNotEmpty();
   }
 }

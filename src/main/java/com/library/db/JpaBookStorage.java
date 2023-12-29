@@ -30,21 +30,7 @@ public class JpaBookStorage implements BookStorage {
 
   @Override
   public UUID addBook(Book book) {
-    return bookRepository.save(bookMapper.toEntity(book, authorMapper)).getTechnicalId();
-    // todo handle Author exists/not exists
-  }
-
-  @Override
-  public Book findByTechnicalId(UUID technicalId) {
-    return bookRepository
-        .findByTechnicalId(technicalId)
-        .map(bookMapper::toDomain)
-        .orElseThrow(() -> new BookNotFoundException(technicalId));
-  }
-
-  @Override
-  public void save(Book book) {
-    bookRepository.save(bookMapper.toEntity(book, authorMapper));
+    return bookRepository.save(bookMapper.toEntity(book)).getTechnicalId();
   }
 
   @Override
@@ -54,6 +40,7 @@ public class JpaBookStorage implements BookStorage {
         bookRepository
             .findByTechnicalId(bookTechnicalId)
             .orElseThrow(() -> new BookNotFoundException(bookTechnicalId));
+
     var authorEntities = authorRepository.findByTechnicalIdIsIn(authorTechnicalIds);
 
     authorEntities.forEach(bookEntity::addAuthor);

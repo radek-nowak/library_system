@@ -26,6 +26,7 @@ public class JpaAuthorStorage implements AuthorStorage {
   @Override
   public UUID addAuthor(Author author) {
     return authorRepository.save(authorMapper.toEntity(author, bookMapper)).getTechnicalId();
+    // todo do not add books when creating a new author
   }
 
   @Override

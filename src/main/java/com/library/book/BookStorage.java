@@ -9,9 +9,5 @@ public interface BookStorage {
 
   UUID addBook(Book book);
 
-  Book findByTechnicalId(UUID technicalId);
-
-  void save(Book book);
-
   void updateBooksAuthorsList(UUID bookTechnicalId, List<UUID> authorTechnicalIds);
 }

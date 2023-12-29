@@ -1,41 +1,47 @@
 package com.library.db.entity;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.collection.spi.PersistentSet;
 
 @Entity
 @Table(name = "BOOKS")
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class BookEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Long id;
+  private Long id;
 
-  String title;
+  private String title;
 
   @ManyToMany(
       mappedBy = "books",
-      cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+      cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+      fetch = FetchType.EAGER)
   @ToString.Exclude
-  Set<AuthorEntity> authors = new HashSet<>();
+  private Set<AuthorEntity> authors = new HashSet<>();
 
-  UUID technicalId;
+  private UUID technicalId;
 
-  public BookEntity(Long id, String title, Set<AuthorEntity> authors) {
+  public BookEntity(Long id, String title) {
     this.id = id;
-    this.title = title; // todo search by title makes sense
-    this.authors = authors;
+    this.title = title;
     this.technicalId = UUID.randomUUID();
   }
 
@@ -45,16 +51,4 @@ public class BookEntity {
       author.addBook(this);
     }
   }
-
-  public Set<AuthorEntity> getAuthors() {
-    if (authors instanceof PersistentSet && !((PersistentSet) authors).wasInitialized()) {
-      authors = new HashSet<>();
-    }
-    if (authors == null) {
-      authors = new HashSet<>();
-    }
-    return authors;
-  }
-
-
 }
