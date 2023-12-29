@@ -2,7 +2,7 @@ package com.library.rest.fixture;
 
 import com.library.db.entity.AuthorEntity;
 import com.library.db.entity.BookEntity;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class BookEntityFixture {
 
   private Long id = null;
   private String title = "Title";
-  private Set<AuthorEntity> authors = Collections.emptySet();
+  private Set<AuthorEntity> authors = new HashSet<>();
   private UUID technicalId = UUID.randomUUID();
 
   public BookEntity build() {
