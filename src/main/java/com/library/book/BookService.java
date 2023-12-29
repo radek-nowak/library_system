@@ -1,6 +1,7 @@
 package com.library.book;
 
 import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +14,13 @@ public class BookService {
 
   public List<Book> findAll() {
     return bookStorage.findAll().stream().map(mapper::toDomain).toList();
+  }
+
+  public UUID addNewBook(Book book) {
+    return bookStorage.addBook(book);
+  }
+
+  public void updateBooksAuthorList(UUID bookTechnicalId, List<UUID> UUID) {
+    bookStorage.updateBooksAuthorsList(bookTechnicalId, UUID);
   }
 }

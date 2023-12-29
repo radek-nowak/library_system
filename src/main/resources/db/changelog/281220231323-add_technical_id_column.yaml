@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      author: Radosław Nowak
+      id: 1
+      comment: Books add technical id column
+      changes:
+        - addColumn:
+            tableName: books
+            columns:
+              - column:
+                  name: technical_id
+                  type: uuid
+                  constraints:
+                    nullable: true
+                    unique: true
+
+  - changeSet:
+      author: Radosław Nowak
+      id: 2
+      comment: Authors add technical id column
+      changes:
+        - addColumn:
+            tableName: authors
+            columns:
+              - column:
+                  name: technical_id
+                  type: uuid
+                  constraints:
+                    nullable: true
+                    unique: true

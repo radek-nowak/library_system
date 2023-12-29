@@ -1,31 +1,46 @@
 package com.library.db.entity;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
-import lombok.AccessLevel;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "AUTHORS")
 @Getter
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthorEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Long id;
+  private Long id;
 
-  String name;
+  private String name;
 
-  @ManyToMany
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   @JoinTable(
-      name = "books-authors",
+      name = "authors_books",
       joinColumns = @JoinColumn(name = "book_id"),
       inverseJoinColumns = @JoinColumn(name = "author_id"))
-  Set<BookEntity> books;
+  private Set<BookEntity> books = new HashSet<>();
+
+  private UUID technicalId;
+
+  public AuthorEntity(Long id, String name, Set<BookEntity> books) {
+    this.id = id;
+    this.name = name;
+    this.books = books;
+    this.technicalId = UUID.randomUUID();
+  }
+
+  public void addBook(BookEntity book) {
+    if (!books.contains(book)) {
+      books.add(book);
+      book.addAuthor(this);
+    }
+  }
 }

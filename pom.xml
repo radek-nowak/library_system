@@ -106,9 +106,8 @@
                 <executions>
                     <execution>
                         <id>format</id>
-                        <phase>process-sources</phase>
+                        <phase>package</phase>
                         <goals>
-                            <goal>check</goal>
                             <goal>apply</goal>
                         </goals>
                     </execution>
