@@ -5,7 +5,7 @@ databaseChangeLog:
       comment: Join table between authors and books
       changes:
         - createTable:
-            tableName: authors-books
+            tableName: authors_books
             columns:
               - column:
                   name: author_id
@@ -25,6 +25,6 @@ databaseChangeLog:
                     references: books(id)
 
         - addPrimaryKey:
-            tableName: authors-books
+            tableName: authors_books
             constraintName: pk-authors-books
             columnNames: author_id, book_id

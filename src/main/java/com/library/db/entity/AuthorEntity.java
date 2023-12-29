@@ -1,7 +1,11 @@
 package com.library.db.entity;
 
+import com.library.book.Book;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,10 +26,26 @@ public class AuthorEntity {
 
   String name;
 
-  @ManyToMany
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   @JoinTable(
-      name = "books-authors",
+      name = "authors_books",
       joinColumns = @JoinColumn(name = "book_id"),
       inverseJoinColumns = @JoinColumn(name = "author_id"))
-  Set<BookEntity> books;
+  Set<BookEntity> books = new HashSet<>();
+
+  UUID technicalId;
+
+  public AuthorEntity(Long id, String name, Set<BookEntity> books) {
+    this.id = id;
+    this.name = name;
+    this.books = books;
+    this.technicalId = UUID.randomUUID();
+  }
+
+  public void addBook(BookEntity book) {
+    if (!books.contains(book)) {
+      books.add(book);
+      book.addAuthor(this);
+    }
+  }
 }

@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/271220231522-authors-create_table.yaml
   - include:
       file: db/changelog/271220231523-authors_books_join_table-create_table.yaml
+  - include:
+      file: db/changelog/281220231323-add_technical_id_column.yaml
