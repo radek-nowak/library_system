@@ -9,9 +9,7 @@ public interface BookMapper {
 
   Book toDomain(BookEntity entity);
 
-  Set<BookEntity> toEntity(Set<Book> books);
+  BookEntity toEntity(Book book);
 
-  default BookEntity toEntity(Book book) {
-    return new BookEntity(book.id(), book.title());
-  }
+  Set<BookEntity> toEntity(Set<Book> books);
 }

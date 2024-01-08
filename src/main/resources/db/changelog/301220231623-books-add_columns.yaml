@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      author: Radosław Nowak
+      id: 1
+      changes:
+        - addColumn:
+            tableName: books
+            columns:
+              - column:
+                  name: genre
+                  type: varchar(512)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: publication_year
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: isbn
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                    unique: true
+

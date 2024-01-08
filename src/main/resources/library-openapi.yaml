@@ -123,6 +123,11 @@ components:
           items:
             $ref: '#/components/schemas/AuthorPostObject'
           example: Joseph Heller
+        isbn:
+          description: Books isbn
+          type: string
+        publicationYear:
+          type: integer
     BookPostObject:
       description: Book object
       type: object
@@ -131,19 +136,30 @@ components:
           description: Book's title
           type: string
           example: Catch 22
-        authors:
-          description: Book's author
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorPostObject'
-          example: Joseph Heller
+        isbn:
+          description: Book's isbn
+          type: string
+          example: 978-83-01-00000-1
+        publicationYear:
+          description: Book's publication year
+          type: integer
+          example: 1984
+        genre:
+          description: Book's genre
+          type: string
+          example: Thriller
+
+    #        authors:
+#          description: Book's author
+#          type: array
+#          items:
+#            $ref: '#/components/schemas/AuthorPostObject'
+#          example: Joseph Heller
     AuthorPostObject:
       type: object
       properties:
         name:
           type: string
-
-
 
   responses:
     BookListResponse:
